@@ -19,3 +19,6 @@ of the user in the lxd group in /etc/group.
 
 As tested, these changes are not needed anymore. Also group membership on desktop systems seems to be standard now.
 This enables the user to launch the lxd command without sudo.
+
+The name of the container that has to be changed has to be set in the variable on top of the script.
+
