@@ -10,7 +10,7 @@ prequisites:
 
 - snap install of lxd on ubuntu (tested with 19.04/cosmic)
 - lxd setup with 'lxd init' and 
-- a container running ubunu 19.04 -> 'lxc launch ubuntu:19.04'
+- a container running ubunu 19.04 -> 'lxc launch ubuntu:19.04 ubuntu-1904-gui'
 
 
 Notes:
