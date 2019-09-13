@@ -17,5 +17,5 @@ Notes:
 Cotrary to the article the changes in this script to the /etc/subuid and /etc/subgid files depend on membership
 of the user in the lxd group in /etc/group.
 
-As tested, these changes are not needed anymore. Also group membership on a desktop systems seems to be standard now.
+As tested, these changes are not needed anymore. Also group membership on desktop systems seems to be standard now.
 This enables the user to launch the lxd command without sudo.
