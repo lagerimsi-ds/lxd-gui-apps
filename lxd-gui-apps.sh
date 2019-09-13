@@ -40,13 +40,13 @@ then
 	echo "root:$UID:1" | sudo tee -a /etc/subuid /etc/subgid
 fi
 
-# for the container
+# for the container - to be able to use X
 lxc config set $container_name raw.idmap "both $UID 1000"
 
 # then restart the container
 lxc restart $container_name
 
-# gie access to unix socket for 
+# get access to unix socket for X
 lxc config device add $container_name X"$x_display" disk path=/tmp/.X11-unix/X"$x_display" source=/tmp/.X11-unix/X"$x_display"
 lxc config device add $container_name Xauthority disk path=/home/ubuntu/.Xauthority source="${XAUTHORITY}"
 
