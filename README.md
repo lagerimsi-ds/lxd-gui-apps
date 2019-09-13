@@ -8,7 +8,7 @@ https://blog.simos.info/how-to-run-graphics-accelerated-gui-apps-in-lxd-containe
 
 prequisites:
 
-- snap install of lxd on ubuntu (tested with 19.04/cosmic)
+- snap install of lxd on ubuntu (tested with 19.04/disco)
 - lxd setup with 'lxd init' and 
 - a container running ubunu 19.04 -> 'lxc launch ubuntu:19.04 ubuntu-1904-gui'
 
