@@ -1,6 +1,22 @@
 #! /bin/bash
-
-
+#
+#
+#    Copyright (C) 2019  Dominik Steinberger
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+#
 
 
 container_name=ubuntu-1904-gui
@@ -18,7 +34,7 @@ lxc exec $container_name -- sudo --login --user ubuntu  sudo apt upgrade
 lxc exec $container_name -- sudo --login --user ubuntu sudo apt install x11-apps mesa-utils alsa-utils firefox libcanberra-gtk3-module mplayer
 
 # The command appends a new entry in both the /etc/subuid and /etc/subgid subordinate UID/GID files. It allows the LXD service (runs as root) to remap our user’s ID ($UID, from the host) as requested.
-
+# not needed when user is in group lxd to manage lxc/lxd
 if ! grep  "lxd.*$USER" /etc/group 
 then
 	echo "root:$UID:1" | sudo tee -a /etc/subuid /etc/subgid
@@ -29,7 +45,7 @@ lxc config set $container_name raw.idmap "both $UID 1000"
 # then restart the container
 lxc restart $container_name
 
-# gie access to unix socket for X
+# gie access to unix socket for 
 lxc config device add $container_name X"$x_display" disk path=/tmp/.X11-unix/X"$x_display" source=/tmp/.X11-unix/X"$x_display"
 lxc config device add $container_name Xauthority disk path=/home/ubuntu/.Xauthority source="${XAUTHORITY}"
 
