@@ -25,10 +25,10 @@ container_name=ubuntu-1904-gui
 lxd_bridge=lxdbr0
 
 
-lxd_network_address=$(lxc network show $lxd_bridge  | grep ipv4.address | awk '{print $2}'
+lxd_network_address=$(lxc network show $lxd_bridge | grep ipv4.address | awk '{print $2}')
 x_display="${DISPLAY##*:}"
 
-# login and install apps 
+# install apps in container
 lxc exec $container_name -- sudo --login --user ubuntu sudo apt update
 lxc exec $container_name -- sudo --login --user ubuntu  sudo apt upgrade
 lxc exec $container_name -- sudo --login --user ubuntu sudo apt install x11-apps mesa-utils alsa-utils firefox libcanberra-gtk3-module mplayer
@@ -42,6 +42,7 @@ fi
 
 # for the container
 lxc config set $container_name raw.idmap "both $UID 1000"
+
 # then restart the container
 lxc restart $container_name
 
@@ -61,9 +62,7 @@ sudo sed -i.backup_"$(date -Iseconds)" 's/^#load-module module-native-protocol-t
 sudo cp  /etc/pulse/system.pa /etc/pulse/system.pa_backup_"$(date -Iseconds)"
 echo "load-module module-native-protocol-tcp auth-ip-acl=$lxd_network_address" | sudo tee -a /etc/pulse/system.pa 
 
-
 # push helper script on container
-
 lxc file push ./gui-guest-helper.sh $container_name/tmp/
 
 # execute script in the container:
@@ -76,7 +75,6 @@ lxc config device add $container_name PACookie disk path=/home/ubuntu/.config/pu
 lxc restart $container_name 
 
 echo -E "Time to run 'lxc exec $container_name -- sudo --login --user ubuntu firefox'"
-echo -E 
 cat << 'EOF'
 Consider this command for a deskop shortcut:
 # if [ $(lxc list | grep $container_name |awk -F'|' '{ print $3 }') = RUNNING ]; then lxc exec $container_name -- sudo --login --user ubuntu firefox; else lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name; fi
