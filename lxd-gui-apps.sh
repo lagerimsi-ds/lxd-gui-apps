@@ -77,11 +77,19 @@ lxc restart $container_name
 echo -E "Time to run 'lxc exec $container_name -- sudo --login --user ubuntu firefox'"
 cat << 'EOF'
 Consider this command for a deskop shortcut:
-# if [ $(lxc list | grep $container_name |awk -F'|' '{ print $3 }') = RUNNING ]; then lxc exec $container_name -- sudo --login --user ubuntu firefox; else lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name; fi
-(starts $container_name if needed and stops it or starts firefox without stopping after usage, when machine is running)
+# if lxc info $container_name | grep -q "Status: Running"; then lxc exec $container_name -- sudo --login --user ubuntu firefox; else lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name; fi
+(starts $container_name if needed and stops it after browsing or starts firefox without stopping after usage, when container is already running)
 
 Or for private browsing link if container is used for this purpose only: make a snapshot- browse - restore system from made snapshot - then delete the snapshot again:
-# lxc snapshot $container_name && if [ "$(lxc list | grep $container_name |awk -F'|' '{ print $7 }')" -gt 0 ]; then snap=$(lxc list | grep $container_name | awk -F'|' '{ print $7 }') snap=$((snap-1)); else snap=0; fi && lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name && lxc restore $container_name snap$snap && lxc delete $container_name/snap$((snap-1))"
+# lxc snapshot $container_name temporary_snapshot && lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name && lxc restore $container_name/temporary_snapshot  && lxc delete $container_name/temporary_snapshot"
 
-Mind the '#' at the beginning! They are there to prevent accidantly pasting on the CLI.
+Mind the '#' at the beginning! They are to prevent accidantly pasting on the CLI.
 EOF
+
+
+
+# former more difficult commands using 'lxc list'
+# if [ $(lxc list | grep $container_name |awk -F'|' '{ print $3 }') = RUNNING ]; then lxc exec $container_name -- sudo --login --user ubuntu firefox; else lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name; fi
+
+# former more difficult commands without snapshot name
+# lxc snapshot $container_name && if [ "$(lxc list | grep $container_name |awk -F'|' '{ print $7 }')" -gt 0 ]; then snap=$(lxc list | grep $container_name | awk -F'|' '{ print $7 }') snap=$((snap-1)); else snap=0; fi && lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name && lxc restore $container_name snap$snap && lxc delete $container_name/snap$((snap-1))"
