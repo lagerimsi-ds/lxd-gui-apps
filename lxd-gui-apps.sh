@@ -81,7 +81,7 @@ Consider this command for a deskop shortcut:
 (starts $container_name if needed and stops it after browsing or starts firefox without stopping after usage, when container is already running)
 
 Or for private browsing link if container is used for this purpose only: make a snapshot- browse - restore system from made snapshot - then delete the snapshot again:
-# lxc snapshot $container_name temporary_snapshot && lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name && lxc restore $container_name/temporary_snapshot  && lxc delete $container_name/temporary_snapshot"
+# lxc snapshot $container_name temporary_snapshot && lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name && lxc restore $container_name temporary_snapshot  && lxc delete $container_name/temporary_snapshot"
 
 Mind the '#' at the beginning! They are to prevent accidantly pasting on the CLI.
 EOF
