@@ -47,6 +47,6 @@ Consider this command for a deskop shortcut (command to execute):
 Or for private browsing, if container is used for this purpose only: make a snapshot- browse - restore system from snapshot to original state - then delete the old snapshot:
 # lxc snapshot $container_name temporary_snapshot && lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name && lxc restore $container_name temporary_snapshot  && lxc delete $container_name/temporary_snapshot"
 
-Mind the '#' at the beginning! They are to prevent accidantly pasting on the CLI.
+Mind the '#' at the beginning! They prevent accidantly pasting and executing on the CLI. The commands might be executed as normal user.
 ```
 
