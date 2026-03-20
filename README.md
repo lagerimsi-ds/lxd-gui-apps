@@ -1,11 +1,11 @@
 # lxd-gui-apps
 A bash script preparing lxd and an already setup container to run gui apps seemlessly intergrating into the desktop environment.
 
-############################################################
-# deprecated as depending on ubuntu 19.04 - update planned #
-############################################################
+______
+**deprecated as depending on Ubuntu 19.04 - update planned**
+______
 
-# TODOs:
+## TODOs:
 - Update to newer Distributions
   - main changes: pipewire, wayland
 - add Debian as Base Image and Container-Host
