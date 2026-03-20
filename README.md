@@ -37,3 +37,16 @@ This enables the user to use the lxc command without sudo for management purpose
 	- Standard: lxdbr0
 
 
+### ...some example for a desktop button per website (set homepage!; never delete cookies or cache gain); and: with snapshot revert, help for secure browsing
+
+```
+Consider this command for a deskop shortcut (command to execute):
+# if lxc info $container_name | grep -q "Status: Running"; then lxc exec $container_name -- sudo --login --user ubuntu firefox; else lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name; fi
+(starts $container_name if needed and stops it after browsing or starts firefox without stopping after usage, when container is already running)
+
+Or for private browsing, if container is used for this purpose only: make a snapshot- browse - restore system from snapshot to original state - then delete the old snapshot:
+# lxc snapshot $container_name temporary_snapshot && lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name && lxc restore $container_name temporary_snapshot  && lxc delete $container_name/temporary_snapshot"
+
+Mind the '#' at the beginning! They are to prevent accidantly pasting on the CLI.
+```
+
