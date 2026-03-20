@@ -37,8 +37,8 @@ This enables the user to use the lxc command without sudo for management purpose
 	- Standard: lxdbr0
 
 
-### ...some example for a desktop button per website (set homepage in browser or as an argument for the Firefox command below per button; never delete cookies or cache again); and: with snapshot revert, help for secure browsing
-
+### ...some example for a desktop button per website; and: with snapshot revert, help for secure browsing
+(set homepage in browser or as an argument for the Firefox command below per button; never delete cookies or cache again)
 ```
 Consider this command for a deskop shortcut (command to execute):
 # if lxc info $container_name | grep -q "Status: Running"; then lxc exec $container_name -- sudo --login --user ubuntu firefox; else lxc start $container_name && lxc exec $container_name -- sudo --login --user ubuntu firefox && lxc stop $container_name; fi
