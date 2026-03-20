@@ -37,7 +37,7 @@ This enables the user to use the lxc command without sudo for management purpose
 	- Standard: lxdbr0
 
 
-### ...some example for a desktop button per website (set homepage!; never delete cookies or cache gain); and: with snapshot revert, help for secure browsing
+### ...some example for a desktop button per website (set homepage!; never delete cookies or cache again); and: with snapshot revert, help for secure browsing
 
 ```
 Consider this command for a deskop shortcut (command to execute):
