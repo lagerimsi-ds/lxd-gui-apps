@@ -1,7 +1,20 @@
 # lxd-gui-apps
 A bash script preparing lxd and an already setup container to run gui apps seemlessly intergrating into the desktop environment.
 
+############################################################
+# deprecated as depending on ubuntu 19.04 - update planned #
+############################################################
 
+# TODOs:
+- Update to newer Distributions
+  - main changes: pipewire, wayland
+- add Debian as Base Image and Container-Host
+- Respect differences in installation procedure
+- give just hints where things break
+- install routines to be adjusted to work as template for other distributions (host and image)
+
+
+## Sources  
 Based on an article by Simos Xenitellis which can be found here:
 
 https://blog.simos.info/how-to-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/
